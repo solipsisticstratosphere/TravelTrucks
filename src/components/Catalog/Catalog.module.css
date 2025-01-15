@@ -1,0 +1,34 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+}
+
+.campersGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.loadMoreButton {
+  width: 100%;
+  margin-top: 24px;
+  padding: 12px;
+  background-color: #e44848;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.loadMoreButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
