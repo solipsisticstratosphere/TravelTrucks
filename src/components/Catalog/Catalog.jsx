@@ -8,8 +8,16 @@ import { useEffect } from "react";
 
 const Catalog = () => {
   const dispatch = useDispatch();
-  const { items, total, currentPage, filters, favorites, loading, error } =
-    useSelector((state) => state.campers);
+  const {
+    items,
+    total,
+    currentPage,
+    filters,
+    favorites,
+    loading,
+    error,
+    hasMore,
+  } = useSelector((state) => state.campers);
 
   useEffect(() => {
     if (items.length === 0) {
@@ -20,7 +28,13 @@ const Catalog = () => {
         })
       );
     }
-  }, [dispatch]);
+  }, [dispatch, items.length, filters]);
+
+  useEffect(() => {
+    if (items.length >= total && total !== 0) {
+      return;
+    }
+  }, [items.length, total]);
 
   const handleFilterChange = async (newFilters) => {
     dispatch(setFilters(newFilters));
@@ -33,7 +47,7 @@ const Catalog = () => {
   };
 
   const handleLoadMore = () => {
-    if (!loading && items.length < total) {
+    if (!loading) {
       dispatch(
         fetchCampers({
           page: currentPage,
@@ -42,6 +56,7 @@ const Catalog = () => {
       );
     }
   };
+
   const renderCamperCard = (camper, index) => (
     <CamperCard
       key={`${camper.id}-${index}`}
@@ -49,7 +64,6 @@ const Catalog = () => {
       isFavorite={favorites.includes(camper.id)}
     />
   );
-  const showLoadMore = !loading && items.length > 0 && items.length < total;
 
   return (
     <div className={styles.container}>
@@ -59,7 +73,6 @@ const Catalog = () => {
           onFilterChange={handleFilterChange}
           disabled={loading}
         />
-
         <div className={styles.campersSection}>
           {loading && items.length === 0 && (
             <div className={styles.loading}>Loading...</div>
@@ -75,7 +88,7 @@ const Catalog = () => {
           {loading && items.length > 0 && (
             <div className={styles.loadingMore}>Loading more...</div>
           )}
-          {showLoadMore && (
+          {hasMore && !loading && (
             <button
               className={styles.loadMoreButton}
               onClick={handleLoadMore}

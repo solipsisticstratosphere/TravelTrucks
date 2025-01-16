@@ -1,16 +1,7 @@
 import { useState } from "react";
 import styles from "./FiltersPanel.module.css";
-import {
-  Search,
-  Wind,
-  Cog,
-  Coffee,
-  Tv,
-  Bath,
-  Car,
-  LayoutGrid,
-  Grid3X3,
-} from "lucide-react";
+import { Search } from "lucide-react";
+import SvgIcon from "../../utils/SvgIcon";
 
 const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
   const [localFilters, setLocalFilters] = useState(filters);
@@ -29,7 +20,7 @@ const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
   return (
     <div className={styles.filtersCard}>
       <div className={styles.filterSection}>
-        <h3 className={styles.sectionTitle}>Location</h3>
+        <h3 className={styles.sectionTitleLocation}>Location</h3>
         <div className={styles.locationInputWrapper}>
           <input
             type="text"
@@ -37,10 +28,11 @@ const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
             onChange={(e) =>
               handleLocalFilterChange("location", e.target.value)
             }
-            placeholder="Kyiv, Ukraine"
+            placeholder="City"
             className={styles.locationInput}
             disabled={disabled}
           />
+          <SvgIcon name="map" className={styles.locationInputIcon} />
         </div>
       </div>
 
@@ -56,7 +48,7 @@ const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
             onClick={() => handleLocalFilterChange("AC", !localFilters.AC)}
             type="button"
           >
-            <Wind className={styles.icon} />
+            <SvgIcon name="wind" className={styles.icon} />
             <span>AC</span>
           </button>
 
@@ -72,7 +64,7 @@ const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
             }
             type="button"
           >
-            <Cog className={styles.icon} />
+            <SvgIcon name="diagram" className={styles.icon} />
             <span>Automatic</span>
           </button>
 
@@ -85,7 +77,7 @@ const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
             }
             type="button"
           >
-            <Coffee className={styles.icon} />
+            <SvgIcon name="cup-hot" className={styles.icon} />
             <span>Kitchen</span>
           </button>
 
@@ -96,7 +88,7 @@ const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
             onClick={() => handleLocalFilterChange("TV", !localFilters.TV)}
             type="button"
           >
-            <Tv className={styles.icon} />
+            <SvgIcon name="tv" className={styles.icon} />
             <span>TV</span>
           </button>
 
@@ -109,12 +101,11 @@ const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
             }
             type="button"
           >
-            <Bath className={styles.icon} />
+            <SvgIcon name="ph-shower" className={styles.icon} />
             <span>Bathroom</span>
           </button>
         </div>
 
-        {/* Vehicle Type */}
         <h4 className={styles.subsectionTitle}>Vehicle type</h4>
         <div className={styles.vehicleTypeGrid}>
           <button
@@ -129,7 +120,7 @@ const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
             }
             type="button"
           >
-            <Car className={styles.icon} />
+            <SvgIcon name="bi-grid-1x2" className={styles.icon} />
             <span>Van</span>
           </button>
 
@@ -145,7 +136,7 @@ const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
             }
             type="button"
           >
-            <LayoutGrid className={styles.icon} />
+            <SvgIcon name="bi-grid" className={styles.icon} />
             <span>Fully Integrated</span>
           </button>
 
@@ -161,20 +152,18 @@ const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
             }
             type="button"
           >
-            <Grid3X3 className={styles.icon} />
+            <SvgIcon name="bi-grid-3x3-gap" className={styles.icon} />
             <span>Alcove</span>
           </button>
         </div>
       </div>
 
-      {/* Search Button */}
       <button
         className={styles.searchButton}
         onClick={handleSearch}
         disabled={disabled}
         type="button"
       >
-        <Search className={styles.searchIcon} />
         Search
       </button>
     </div>

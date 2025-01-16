@@ -1,17 +1,37 @@
 .card {
   display: flex;
   background: white;
-  border-radius: 12px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #dadde1;
+  padding: 24px;
 }
-
+.icon {
+  width: 24px;
+  height: 21px;
+  color: #121417;
+}
+.iconHeart {
+  width: 24px;
+  height: 21px;
+  filter: brightness(0) saturate(100%) invert(39%) sepia(64%) saturate(2771%)
+    hue-rotate(337deg) brightness(99%) contrast(88%);
+}
+.iconRating {
+  width: 18px;
+  height: 18px;
+}
 .image {
-  width: 256px;
-  height: 192px;
+  width: 292px;
+  height: 320px;
   object-fit: cover;
+  border-radius: 10px;
 }
-
+.location {
+  display: flex;
+  gap: 4px;
+  margin-left: 10px;
+}
 .content {
   flex: 1;
   padding: 16px;
@@ -29,13 +49,21 @@
   font-weight: bold;
   margin: 0;
 }
-
+.rating {
+  align-items: center;
+  display: flex;
+}
 .reviews {
-  font-size: 14px;
-  color: #666;
+  flex-direction: row;
+  display: flex;
+  font-size: 16px;
+  color: #101828;
   margin-top: 4px;
 }
-
+.ratingWrapper {
+  border-bottom: 2px solid black;
+  margin-left: 4px;
+}
 .priceSection {
   display: flex;
   align-items: center;
@@ -57,9 +85,16 @@
 .description {
   margin: 12px 0;
   color: #666;
+  display: -webkit-box; /* Включить flex-контейнер */
+  -webkit-line-clamp: 2; /* Количество видимых строк */
+  -webkit-box-orient: vertical; /* Ориентация текста */
+  overflow: hidden; /* Скрыть лишний текст */
 }
 
 .features {
+  flex-wrap: wrap;
+  overflow: auto;
+  width: 500px;
   display: flex;
   gap: 16px;
   margin-top: 16px;
@@ -68,20 +103,29 @@
 .feature {
   display: flex;
   align-items: center;
-  gap: 4px;
-  color: #666;
+  gap: 8px;
+  border-radius: 100px;
+  padding: 12px 18px;
+  max-width: 100%;
+  height: 48px;
+  background: #f2f4f7;
+  mix-blend-mode: multiply;
 }
 
 .showMoreButton {
+  width: 166px;
+  height: 56px;
   margin-top: 16px;
-  padding: 8px 16px;
-  background-color: #e44848;
+  border-radius: 200px;
+
+  background-color: var(--button-red);
   color: white;
   border: none;
-  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
 .showMoreButton:hover {
-  background-color: #d43d3d;
+  background-color: var(--button-hover-red);
 }

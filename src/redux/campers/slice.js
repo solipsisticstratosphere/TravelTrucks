@@ -5,6 +5,7 @@ const initialState = {
   items: [],
   total: 0,
   currentPage: 1,
+  hasMore: true,
   selectedCamper: null,
   filters: {
     location: "",
@@ -32,6 +33,7 @@ const campersSlice = createSlice({
       state.filters = action.payload;
       state.currentPage = 1;
       state.items = [];
+      state.hasMore = true;
     },
     toggleFavorite: (state, action) => {
       const camperId = action.payload;
@@ -59,10 +61,17 @@ const campersSlice = createSlice({
         state.loading = false;
         state.error = null;
 
+        const newItems = action.payload.items || [];
+        state.total = action.payload.total || 0;
+
+        if (newItems.length === 0 && state.currentPage > 1) {
+          state.hasMore = false;
+          return;
+        }
+
         if (state.currentPage === 1) {
-          state.items = action.payload.items || [];
+          state.items = newItems;
         } else {
-          const newItems = action.payload.items || [];
           const existingIds = new Set(state.items.map((item) => item.id));
           const uniqueNewItems = newItems.filter(
             (item) => !existingIds.has(item.id)
@@ -70,14 +79,16 @@ const campersSlice = createSlice({
           state.items = [...state.items, ...uniqueNewItems];
         }
 
-        state.total = action.payload.total || 0;
-        if (action.payload.items?.length > 0) {
+        state.hasMore = newItems.length > 0 && state.items.length < state.total;
+
+        if (newItems.length > 0) {
           state.currentPage += 1;
         }
       })
       .addCase(fetchCampers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "An error occurred";
+        state.hasMore = false;
       })
       .addCase(fetchCamperDetails.pending, (state) => {
         state.loading = true;

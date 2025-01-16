@@ -1,15 +1,17 @@
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 20px;
 }
 
 .gridContainer {
-  display: grid;
+  flex-direction: row;
+  display: flex;
   grid-template-columns: 300px 1fr;
   gap: 24px;
 }
-
+.campersSection {
+  flex-direction: column;
+  display: flex;
+}
 .campersGrid {
   display: grid;
   grid-template-columns: 1fr;
@@ -17,18 +19,23 @@
 }
 
 .loadMoreButton {
-  width: 100%;
+  width: 145px;
   margin-top: 24px;
   padding: 12px;
-  background-color: #e44848;
-  color: white;
+  background-color: transparent;
+  color: #101828;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   font-size: 16px;
+  align-self: center;
+  border: 1px solid #dadde1;
+  border-radius: 200px;
+  transition: border-color 0.3s;
 }
-
+.loadMoreButton:hover {
+  border-color: #d84343;
+}
 .loadMoreButton:disabled {
-  background-color: #cccccc;
   cursor: not-allowed;
 }

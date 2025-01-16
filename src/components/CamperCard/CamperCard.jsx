@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { toggleFavorite } from "../../redux/campers/slice";
 import styles from "./CamperCard.module.css";
+import SvgIcon from "../../utils/SvgIcon";
 
 const CamperCard = ({ camper, isFavorite }) => {
   const dispatch = useDispatch();
@@ -26,7 +27,18 @@ const CamperCard = ({ camper, isFavorite }) => {
           <div>
             <h3 className={styles.title}>{camper.name}</h3>
             <div className={styles.reviews}>
-              {camper.reviews.length} Reviews • {camper.location}
+              <div className={styles.rating}>
+                <SvgIcon name="rating" className={styles.iconRating} />
+                <div className={styles.ratingWrapper}>
+                  {camper.rating}({camper.reviews.length} Reviews)
+                </div>
+              </div>
+
+              <div className={styles.location}>
+                {" "}
+                <SvgIcon name="map" className={styles.iconRating} />
+                {camper.location}
+              </div>
             </div>
           </div>
           <div className={styles.priceSection}>
@@ -39,7 +51,11 @@ const CamperCard = ({ camper, isFavorite }) => {
                 isFavorite ? "Remove from favorites" : "Add to favorites"
               }
             >
-              {isFavorite ? "❤️" : "🤍"}
+              {isFavorite ? (
+                <SvgIcon name="heart" className={styles.iconHeart} />
+              ) : (
+                <SvgIcon name="heart" className={styles.icon} />
+              )}
             </button>
           </div>
         </div>
@@ -47,10 +63,31 @@ const CamperCard = ({ camper, isFavorite }) => {
         <p className={styles.description}>{camper.description}</p>
 
         <div className={styles.features}>
-          <span className={styles.feature}>🚗 {camper.transmission}</span>
-          <span className={styles.feature}>⛽ {camper.engine}</span>
-          {camper.kitchen && <span className={styles.feature}>🍳 Kitchen</span>}
-          {camper.AC && <span className={styles.feature}>❄️ AC</span>}
+          {camper.transmission && (
+            <span className={styles.feature}>
+              <SvgIcon name="diagram" className={styles.icon} />
+              {camper.transmission.charAt(0).toUpperCase() +
+                camper.transmission.slice(1)}
+            </span>
+          )}
+          {camper.engine && (
+            <span className={styles.feature}>
+              <SvgIcon name="fuel-pump" className={styles.icon} />
+              {camper.engine.charAt(0).toUpperCase() + camper.engine.slice(1)}
+            </span>
+          )}
+          {camper.kitchen && (
+            <span className={styles.feature}>
+              <SvgIcon name="cup-hot" className={styles.icon} />
+              Kitchen
+            </span>
+          )}
+          {camper.AC && (
+            <span className={styles.feature}>
+              <SvgIcon name="wind" className={styles.icon} />
+              AC
+            </span>
+          )}
         </div>
 
         <button
