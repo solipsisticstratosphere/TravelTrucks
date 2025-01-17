@@ -1,0 +1,288 @@
+.container {
+  margin: 0 auto;
+  padding-top: 48px;
+  padding-left: 64px;
+  padding-bottom: 80px;
+}
+.rating {
+  align-items: center;
+  display: flex;
+}
+.reviewsHeader {
+  flex-direction: row;
+  display: flex;
+  font-size: 16px;
+  color: #101828;
+  margin-bottom: 16px;
+}
+.iconRating {
+  width: 18px;
+  height: 18px;
+}
+.location {
+  display: flex;
+  gap: 4px;
+  margin-left: 10px;
+}
+.ratingWrapper {
+  border-bottom: 2px solid black;
+  margin-left: 4px;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+.name {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.location {
+  color: #121417;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.galleryImage {
+  object-fit: cover;
+  border-radius: 10px;
+  width: 292px;
+  height: 312px;
+}
+
+.description {
+  margin-bottom: 60px;
+  line-height: 1.5;
+  color: #475467;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.tabs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.tabButton {
+  padding-bottom: 24px;
+
+  border: none;
+  background: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 20px;
+  color: #121417;
+  position: relative;
+}
+
+.tabButton.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #e44848;
+}
+.tabsFormContainer {
+  display: flex;
+  gap: 40px;
+}
+.features {
+  background: #f7f7f7;
+  display: flex;
+  gap: 100px;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 44px 52px;
+  max-width: 100%;
+}
+
+.featuresList {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 100px;
+  padding: 12px 18px;
+  max-width: 100%;
+  height: 48px;
+  background: #f2f4f7;
+  mix-blend-mode: multiply;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.vehicleDetails {
+  border-radius: 8px;
+}
+.vehicleDetails h3 {
+  font-size: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.detailsGrid {
+  margin-top: 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.detailRow {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.reviews {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.review {
+  border-radius: 8px;
+}
+
+.reviewHeader {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.reviewerInitial {
+  border-radius: 60px;
+  width: 60px;
+  height: 60px;
+
+  background: #f2f4f7;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  color: #e44848;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.reviewerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reviewerName {
+  font-weight: bold;
+}
+
+.reviewRating {
+  color: #3470ff;
+}
+
+.reviewComment {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #475467;
+}
+
+.bookingForm {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dadde1;
+  border-radius: 10px;
+  padding: 44px;
+  width: 641px;
+}
+.bookingForm h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.bookingForm p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #6c717b;
+  margin-bottom: 24px;
+}
+.input,
+.textarea {
+  margin-bottom: 14px;
+  border-style: none;
+  width: 100%;
+  background: #f7f7f7;
+  border-radius: 12px;
+  padding: 18px 337px 18px 18px;
+  width: 527px;
+  height: 60px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #101828;
+}
+.input:focus,
+.textarea:focus {
+  outline: none;
+}
+
+.textarea {
+  min-height: 100px;
+  resize: none;
+}
+
+.submitButton {
+  margin-top: 10px;
+  align-self: center;
+  border-style: none;
+  background: var(--button-red);
+  border-radius: 200px;
+  padding: 16px 60px;
+  width: 166px;
+  height: 56px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: var(--button-hover-red);
+}

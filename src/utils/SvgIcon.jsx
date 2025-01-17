@@ -15,6 +15,7 @@ import fuelPump from "../assets/icons/fuel-pump.svg";
 import radio from "../assets/icons/ui-radios.svg";
 import water from "../assets/icons/ion_water-outline.svg";
 import rating from "../assets/icons/Rating.svg";
+import ratingGrey from "../assets/icons/rating_grey.svg";
 const IconMap = {
   "bi-grid-1x2": biGrid1x2,
   "bi-grid-3x3-gap": biGrid3x3Gap,
@@ -33,6 +34,7 @@ const IconMap = {
   radio: radio,
   water: water,
   rating: rating,
+  ratingGrey: ratingGrey,
 };
 
 const SvgIcon = ({ name, className, color, focusColor, ...props }) => {

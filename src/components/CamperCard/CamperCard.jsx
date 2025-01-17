@@ -42,7 +42,7 @@ const CamperCard = ({ camper, isFavorite }) => {
             </div>
           </div>
           <div className={styles.priceSection}>
-            <span className={styles.price}>{formatedPrice}</span>
+            <span className={styles.price}>€{camper.price}.00</span>
             <button
               onClick={handleToggleFavorite}
               className={styles.favoriteButton}
