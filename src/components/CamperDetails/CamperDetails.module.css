@@ -116,13 +116,13 @@
   gap: 40px;
 }
 .features {
+  max-width: 900px;
   background: #f7f7f7;
   display: flex;
   gap: 100px;
   flex-direction: column;
   border-radius: 10px;
   padding: 44px 52px;
-  max-width: 100%;
 }
 
 .featuresList {
@@ -173,6 +173,7 @@
 }
 
 .reviews {
+  max-width: 900px;
   margin-top: 32px;
   display: flex;
   flex-direction: column;
