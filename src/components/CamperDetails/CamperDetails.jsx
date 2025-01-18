@@ -4,6 +4,12 @@ import styles from "./CamperDetails.module.css";
 import SvgIcon from "../../utils/SvgIcon";
 import { fetchCamperDetails } from "../../redux/campers/operations";
 import { useParams } from "react-router-dom";
+import Loader from "../Loader/Loader";
+import Button from "../Button/Button";
+import toast from "react-hot-toast";
+import { Field, Form, Formik } from "formik";
+import { BookingSchema } from "../../utils/Schemas";
+import FormCalendarField from "../Calendar/Calendar";
 
 const CamperDetails = () => {
   const [activeTab, setActiveTab] = useState("features");
@@ -21,7 +27,7 @@ const CamperDetails = () => {
   }, [dispatch, id]);
 
   if (loading) {
-    return <div className={styles.loading}>Loading camper details...</div>;
+    return <Loader color="#EF4444" size={15} />;
   }
 
   if (error) {
@@ -32,59 +38,55 @@ const CamperDetails = () => {
     return <div className={styles.notFound}>Camper not found</div>;
   }
 
-  const {
-    form,
-    microwave,
-    gas,
-    water,
-    refrigerator,
-    bathroom,
-    radio,
-    AC,
-    kitchen,
-    engine,
-    transmission,
-    name,
-    price,
-    rating,
-    location,
-    description,
-    gallery,
-    reviews,
-    length,
-    width,
-    height,
-    tank,
-    consumption,
-  } = selectedCamper;
-
   const formatMeasurement = (value) => {
     return value.replace(/(\d)([a-zA-Z])/g, "$1 $2");
   };
 
+  const handleSubmit = async (values, { resetForm, setSubmitting }) => {
+    try {
+      console.log("Form values:", values);
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      toast.success("Booking successfully submitted!", {
+        duration: 4000,
+        position: "top-right",
+      });
+
+      resetForm();
+    } catch (error) {
+      toast.error("Failed to submit booking. Please try again.", {
+        duration: 4000,
+        position: "top-right",
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const camper = selectedCamper;
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <p className={styles.name}>{name}</p>
+        <p className={styles.name}>{camper.name}</p>
         <div className={styles.reviewsHeader}>
           <div className={styles.rating}>
             <SvgIcon name="rating" className={styles.iconRating} />
             <div className={styles.ratingWrapper}>
-              {rating}({reviews.length} Reviews)
+              {camper.rating} ({camper.reviews.length} Reviews)
             </div>
           </div>
-
           <div className={styles.location}>
-            {" "}
             <SvgIcon name="map" className={styles.iconRating} />
-            {location}
+            {camper.location}
           </div>
         </div>
-        <div className={styles.price}>€{price}.00</div>
+        <div className={styles.price}>€{camper.price}.00</div>
       </div>
 
       <div className={styles.gallery}>
-        {gallery.map((image, index) => (
+        {camper.gallery.map((image, index) => (
           <img
             key={index}
             src={image.thumb}
@@ -94,7 +96,7 @@ const CamperDetails = () => {
         ))}
       </div>
 
-      <p className={styles.description}>{description}</p>
+      <p className={styles.description}>{camper.description}</p>
 
       <div className={styles.tabs}>
         <button
@@ -118,43 +120,45 @@ const CamperDetails = () => {
         {activeTab === "features" ? (
           <div className={styles.features}>
             <div className={styles.featuresList}>
-              {transmission && (
+              {camper.transmission && (
                 <span className={styles.feature}>
                   <SvgIcon name="diagram" className={styles.icon} />
-                  {transmission.charAt(0).toUpperCase() + transmission.slice(1)}
+                  {camper.transmission.charAt(0).toUpperCase() +
+                    camper.transmission.slice(1)}
                 </span>
               )}
-              {engine && (
+              {camper.engine && (
                 <span className={styles.feature}>
                   <SvgIcon name="fuel-pump" className={styles.icon} />
-                  {engine.charAt(0).toUpperCase() + engine.slice(1)}
+                  {camper.engine.charAt(0).toUpperCase() +
+                    camper.engine.slice(1)}
                 </span>
               )}
-              {kitchen && (
+              {camper.kitchen && (
                 <span className={styles.feature}>
                   <SvgIcon name="cup-hot" className={styles.icon} />
                   Kitchen
                 </span>
               )}
-              {AC && (
+              {camper.AC && (
                 <span className={styles.feature}>
                   <SvgIcon name="wind" className={styles.icon} />
                   AC
                 </span>
               )}
-              {radio && (
+              {camper.radio && (
                 <span className={styles.feature}>
                   <SvgIcon name="radio" className={styles.icon} />
                   Radio
                 </span>
               )}
-              {bathroom && (
+              {camper.bathroom && (
                 <span className={styles.feature}>
                   <SvgIcon name="ph-shower" className={styles.icon} />
                   Bathroom
                 </span>
               )}
-              {refrigerator && (
+              {camper.refrigerator && (
                 <span className={styles.feature}>
                   <SvgIcon
                     name="solar-fridge-outline"
@@ -163,19 +167,19 @@ const CamperDetails = () => {
                   Refrigerator
                 </span>
               )}
-              {microwave && (
+              {camper.microwave && (
                 <span className={styles.feature}>
                   <SvgIcon name="lucide-microwave" className={styles.icon} />
                   Microwave
                 </span>
               )}
-              {gas && (
+              {camper.gas && (
                 <span className={styles.feature}>
                   <SvgIcon name="hugicons-gas-stove" className={styles.icon} />
                   Gas
                 </span>
               )}
-              {water && (
+              {camper.water && (
                 <span className={styles.feature}>
                   <SvgIcon name="water" className={styles.icon} />
                   Water
@@ -188,34 +192,36 @@ const CamperDetails = () => {
               <div className={styles.detailsGrid}>
                 <div className={styles.detailRow}>
                   <span>Form</span>
-                  <span>{form.charAt(0).toUpperCase() + form.slice(1)}</span>
+                  <span>
+                    {camper.form.charAt(0).toUpperCase() + camper.form.slice(1)}
+                  </span>
                 </div>
                 <div className={styles.detailRow}>
                   <span>Length</span>
-                  <span>{formatMeasurement(length)}</span>
+                  <span>{formatMeasurement(camper.length)}</span>
                 </div>
                 <div className={styles.detailRow}>
                   <span>Width</span>
-                  <span>{formatMeasurement(width)}</span>
+                  <span>{formatMeasurement(camper.width)}</span>
                 </div>
                 <div className={styles.detailRow}>
                   <span>Height</span>
-                  <span>{formatMeasurement(height)}</span>
+                  <span>{formatMeasurement(camper.height)}</span>
                 </div>
                 <div className={styles.detailRow}>
                   <span>Tank</span>
-                  <span>{formatMeasurement(tank)}</span>
+                  <span>{formatMeasurement(camper.tank)}</span>
                 </div>
                 <div className={styles.detailRow}>
                   <span>Consumption</span>
-                  <span>{consumption}</span>
+                  <span>{camper.consumption}</span>
                 </div>
               </div>
             </div>
           </div>
         ) : (
           <div className={styles.reviews}>
-            {reviews.map((review, index) => (
+            {camper.reviews.map((review, index) => (
               <div key={index} className={styles.review}>
                 <div className={styles.reviewHeader}>
                   <div className={styles.reviewerInitial}>
@@ -250,21 +256,86 @@ const CamperDetails = () => {
           </div>
         )}
 
-        <form className={styles.bookingForm}>
-          <h3>Book your campervan now</h3>
-          <p>Stay connected! We are always ready to help you.</p>
-          <input type="text" placeholder="Name*" className={styles.input} />
-          <input type="email" placeholder="Email*" className={styles.input} />
-          <input
-            type="text"
-            placeholder="Booking date*"
-            className={styles.input}
-          />
-          <textarea placeholder="Comment" className={styles.textarea} />
-          <button type="submit" className={styles.submitButton}>
-            Send
-          </button>
-        </form>
+        <Formik
+          initialValues={{
+            name: "",
+            email: "",
+            date: "",
+            comment: "",
+          }}
+          validationSchema={BookingSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ errors, touched, isSubmitting }) => (
+            <Form className={styles.bookingForm}>
+              <h3>Book your campervan now</h3>
+              <p>Stay connected! We are always ready to help you.</p>
+
+              <div className={styles.inputWrapper}>
+                <Field
+                  type="text"
+                  name="name"
+                  placeholder="Name*"
+                  className={`${styles.input} ${
+                    errors.name && touched.name ? styles.errorInput : ""
+                  }`}
+                />
+                {errors.name && touched.name && (
+                  <div className={styles.errorText}>{errors.name}</div>
+                )}
+              </div>
+
+              <div className={styles.inputWrapper}>
+                <Field
+                  type="email"
+                  name="email"
+                  placeholder="Email*"
+                  className={`${styles.input} ${
+                    errors.email && touched.email ? styles.errorInput : ""
+                  }`}
+                />
+                {errors.email && touched.email && (
+                  <div className={styles.errorText}>{errors.email}</div>
+                )}
+              </div>
+
+              <div className={styles.inputWrapper}>
+                <FormCalendarField
+                  name="date"
+                  placeholder="Booking date*"
+                  className={`${styles.input} ${
+                    errors.date && touched.date ? styles.errorInput : ""
+                  }`}
+                />
+                {errors.date && touched.date && (
+                  <div className={styles.errorText}>{errors.date}</div>
+                )}
+              </div>
+
+              <div className={styles.inputWrapper}>
+                <Field
+                  as="textarea"
+                  name="comment"
+                  placeholder="Comment"
+                  className={`${styles.textarea} ${
+                    errors.comment && touched.comment ? styles.errorInput : ""
+                  }`}
+                />
+                {errors.comment && touched.comment && (
+                  <div className={styles.errorText}>{errors.comment}</div>
+                )}
+              </div>
+
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className={styles.submitButton}
+              >
+                {isSubmitting ? "Sending..." : "Send"}
+              </Button>
+            </Form>
+          )}
+        </Formik>
       </div>
     </div>
   );

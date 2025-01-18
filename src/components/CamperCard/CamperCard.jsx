@@ -2,14 +2,9 @@ import { useDispatch } from "react-redux";
 import { toggleFavorite } from "../../redux/campers/slice";
 import styles from "./CamperCard.module.css";
 import SvgIcon from "../../utils/SvgIcon";
-
+import Button from "../Button/Button";
 const CamperCard = ({ camper, isFavorite }) => {
   const dispatch = useDispatch();
-
-  const formatedPrice = new Intl.NumberFormat("de-DE", {
-    currency: "EUR",
-    minimumFractionDigits: 2,
-  }).format(camper.price);
 
   const handleToggleFavorite = () => {
     dispatch(toggleFavorite(camper.id));
@@ -90,13 +85,13 @@ const CamperCard = ({ camper, isFavorite }) => {
           )}
         </div>
 
-        <button
+        <Button
           className={styles.showMoreButton}
           onClick={() => window.open(`/catalog/${camper.id}`, "_blank")}
           type="button"
         >
           Show more
-        </button>
+        </Button>
       </div>
     </div>
   );

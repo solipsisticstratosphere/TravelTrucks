@@ -29,8 +29,8 @@
   font-weight: 600;
   margin-bottom: 12px;
   color: #101828;
-  border-bottom: 1px solid #d0d5dd; /* Цвет линии */
-  padding-bottom: 24px; /* Отступ между текстом и линией */
+  border-bottom: 1px solid #d0d5dd;
+  padding-bottom: 24px;
 }
 
 .locationInputWrapper {

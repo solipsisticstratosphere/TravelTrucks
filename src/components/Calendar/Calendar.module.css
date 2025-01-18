@@ -1,0 +1,116 @@
+.calendarWrapper {
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #475467;
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 0;
+  z-index: 1000;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.monthYear {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.navigationButton {
+  background-color: transparent;
+  padding: 4px;
+  border-style: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.navigationButton:hover {
+  background-color: #f3f4f6;
+}
+
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.daysGridHeader {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 120%;
+  text-align: center;
+  color: #475467;
+  border-bottom: 1px solid #475467;
+  border-radius: 12px 12px 0 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.dayLabel {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.dateButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.dateButton:hover:not(.selectedDate):not(.today) {
+  background-color: #f3f4f6;
+}
+
+.selectedDate {
+  background-color: #475467;
+  color: white;
+}
+
+.today:not(.selectedDate) {
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.emptyCell {
+  width: 32px;
+  height: 32px;
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+}
+
+.dateInput {
+  width: 100%;
+  padding: 12px;
+
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px #2563eb;
+}

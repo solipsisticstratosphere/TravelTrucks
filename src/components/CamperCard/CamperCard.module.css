@@ -85,10 +85,10 @@
 .description {
   margin: 12px 0;
   color: #666;
-  display: -webkit-box; /* Включить flex-контейнер */
-  -webkit-line-clamp: 2; /* Количество видимых строк */
-  -webkit-box-orient: vertical; /* Ориентация текста */
-  overflow: hidden; /* Скрыть лишний текст */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .features {

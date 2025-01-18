@@ -5,6 +5,7 @@ import CamperCard from "../CamperCard/CamperCard";
 import FiltersPanel from "../FiltersPanel/FiltersPanel";
 import styles from "./Catalog.module.css";
 import { useEffect } from "react";
+import Loader from "../Loader/Loader";
 
 const Catalog = () => {
   const dispatch = useDispatch();
@@ -73,9 +74,10 @@ const Catalog = () => {
           onFilterChange={handleFilterChange}
           disabled={loading}
         />
+
         <div className={styles.campersSection}>
           {loading && items.length === 0 && (
-            <div className={styles.loading}>Loading...</div>
+            <Loader color="#EF4444" size={15} />
           )}
           {error && <div className={styles.error}>{error}</div>}
           {!loading && items.length === 0 ? (

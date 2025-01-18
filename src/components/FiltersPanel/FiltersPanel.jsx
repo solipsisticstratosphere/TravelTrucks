@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./FiltersPanel.module.css";
 import { Search } from "lucide-react";
 import SvgIcon from "../../utils/SvgIcon";
+import Button from "../Button/Button";
 
 const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
   const [localFilters, setLocalFilters] = useState(filters);
@@ -158,14 +159,14 @@ const FiltersPanel = ({ filters, onFilterChange, disabled }) => {
         </div>
       </div>
 
-      <button
+      <Button
         className={styles.searchButton}
         onClick={handleSearch}
         disabled={disabled}
         type="button"
       >
         Search
-      </button>
+      </Button>
     </div>
   );
 };

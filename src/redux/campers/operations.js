@@ -16,10 +16,9 @@ export const fetchCampers = createAsyncThunk(
       );
 
       const response = await campersAPI.getCampers(page, cleanFilters);
-      console.log("API Response:", response);
+
       return response;
     } catch (error) {
-      console.error("API Error:", error);
       return rejectWithValue(error.message);
     }
   }

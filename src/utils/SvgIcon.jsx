@@ -45,7 +45,6 @@ const SvgIcon = ({ name, className, color, focusColor, ...props }) => {
     return null;
   }
 
-  // Calculate color filter
   const getColorFilter = (colorValue) => {
     return colorValue
       ? `invert(1) sepia(1) saturate(5) hue-rotate(${colorValue}deg)`
