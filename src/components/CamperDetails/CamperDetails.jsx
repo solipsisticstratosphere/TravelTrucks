@@ -185,6 +185,12 @@ const CamperDetails = () => {
                   Water
                 </span>
               )}
+              {camper.TV && (
+                <span className={styles.feature}>
+                  <SvgIcon name="tv" className={styles.icon} />
+                  TV
+                </span>
+              )}
             </div>
 
             <div className={styles.vehicleDetails}>
